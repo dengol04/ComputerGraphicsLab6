@@ -116,28 +116,28 @@ namespace PlatonicSolids
             double t = (1.0 + Math.Sqrt(5.0)) / 2.0;
             double a = 1.0 / t;
             var vertices = new List<Vector3>
-    {
-        new Vector3(1, 1, 1), new Vector3(1, 1, -1), new Vector3(1, -1, 1), new Vector3(1, -1, -1),
-        new Vector3(-1, 1, 1), new Vector3(-1, 1, -1), new Vector3(-1, -1, 1), new Vector3(-1, -1, -1),
-        new Vector3(0, a, t), new Vector3(0, a, -t), new Vector3(0, -a, t), new Vector3(0, -a, -t),
-        new Vector3(a, t, 0), new Vector3(a, -t, 0), new Vector3(-a, t, 0), new Vector3(-a, -t, 0),
-        new Vector3(t, 0, a), new Vector3(t, 0, -a), new Vector3(-t, 0, a), new Vector3(-t, 0, -a)
-    };
+            {
+                new Vector3(1, 1, 1), new Vector3(1, 1, -1), new Vector3(1, -1, 1), new Vector3(1, -1, -1),
+                new Vector3(-1, 1, 1), new Vector3(-1, 1, -1), new Vector3(-1, -1, 1), new Vector3(-1, -1, -1),
+                new Vector3(0, a, t), new Vector3(0, a, -t), new Vector3(0, -a, t), new Vector3(0, -a, -t),
+                new Vector3(a, t, 0), new Vector3(a, -t, 0), new Vector3(-a, t, 0), new Vector3(-a, -t, 0),
+                new Vector3(t, 0, a), new Vector3(t, 0, -a), new Vector3(-t, 0, a), new Vector3(-t, 0, -a)
+            };
             var polygons = new List<Polygon>
-    {
-        new Polygon(new[] {0, 12, 1, 17, 16}),    // Грань 1
-    new Polygon(new[] {1, 9, 5, 14, 12}),     // Грань 2
-    new Polygon(new[] {2, 10, 8, 0, 16}),     // Грань 3
-    new Polygon(new[] {3, 11, 9, 1, 17}),     // Грань 4
-    new Polygon(new[] {4, 14, 5, 19, 18}),    // Грань 5
-    new Polygon(new[] {5, 19, 7, 11, 9}),     // Грань 6
-    new Polygon(new[] {6, 10, 11, 7, 15}),    // Грань 7
-    new Polygon(new[] {7, 15, 14, 4, 18}),    // Грань 8
-    new Polygon(new[] {8, 0, 12, 14, 5}),     // Грань 9
-    new Polygon(new[] {10, 2, 13, 3, 11}),    // Грань 10
-    new Polygon(new[] {13, 2, 16, 17, 3}),    // Грань 11
-    new Polygon(new[] {15, 6, 18, 4, 14})     // Грань 12
-    };
+            {
+                new Polygon(new[] {0, 12, 1, 17, 16}),
+                new Polygon(new[] {1, 9, 5, 14, 12}),
+                new Polygon(new[] {2, 10, 8, 0, 16}),
+                new Polygon(new[] {3, 11, 9, 1, 17}),
+                new Polygon(new[] {4, 14, 5, 19, 18}),
+                new Polygon(new[] {5, 19, 7, 11, 9}),
+                new Polygon(new[] {6, 10, 11, 7, 15}),
+                new Polygon(new[] {7, 15, 14, 4, 18}),
+                new Polygon(new[] {8, 0, 12, 14, 5}),
+                new Polygon(new[] {10, 2, 13, 3, 11}),
+                new Polygon(new[] {13, 2, 16, 17, 3}),
+                new Polygon(new[] {15, 6, 18, 4, 14})
+            };
             return new Polyhedron(vertices, polygons);
         }
     }
