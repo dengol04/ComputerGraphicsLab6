@@ -150,5 +150,26 @@ namespace PlatonicSolids
 
             return new Polyhedron(vertices, polygons);
         }
+
+        public Vector3 GetCenter()
+        {
+            double totalX = 0, totalY = 0, totalZ = 0;
+            foreach (var vertex in Vertices)
+            {
+                totalX += vertex.X;
+                totalY += vertex.Y;
+                totalZ += vertex.Z;
+            }
+            int vertexCount = Vertices.Count;
+            return new Vector3(totalX / vertexCount, totalY / vertexCount, totalZ / vertexCount);
+        }
+
+        public void ApplyTransform(Matrix4x4 transform)
+        {
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                Vertices[i] = transform.Transform(Vertices[i]);
+            }
+        }
     }
 }
