@@ -15,9 +15,56 @@ namespace PlatonicSolids
         {
             InitializeComponent();
             currentPolyhedron = Polyhedron.CreateTetrahedron();
-            this.DoubleBuffered = true;
+                currentPolyhedron.RotateAroundAxisThroughCenter('X', 30);
+                Invalidate();
+            });
+            rotateAxisMenu.DropDownItems.Add("Around Y-axis", null, (s, e) =>
+            {
+                currentPolyhedron.RotateAroundAxisThroughCenter('Y', 30);
+                Invalidate();
+            });
+            rotateAxisMenu.DropDownItems.Add("Around Z-axis", null, (s, e) =>
+            {
+                currentPolyhedron.RotateAroundAxisThroughCenter('Z', 30);
+                Invalidate();
+            });
+            transformationsMenu.DropDownItems.Add(rotateAxisMenu);
+
+            transformationsMenu.DropDownItems.Add("Rotate Around Arbitrary Line...", null, (s, e) =>
+            {
+                using (var dlg = new LineRotationForm())
+                {
+                    if (dlg.ShowDialog(this) == DialogResult.OK)
+                    {
+                        currentPolyhedron.RotateAroundLine(dlg.P1, dlg.P2, dlg.Angle);
+                        Invalidate();
+                    }
+                }
+            });
+
+            transformationsMenu.DropDownItems.Add("Reset", null, (s, e) =>
+            {
+                currentPolyhedron = Polyhedron.CreateTetrahedron();
+                Invalidate();
+            });
+
+            menuStrip1.Items.Add(transformationsMenu);
         }
 
+            Graphics g = e.Graphics;
+            g.Clear(Color.Black);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            if (currentPolyhedron == null) return;
+
+            int width = ClientSize.Width;
+            {
+                PointF[] points = new PointF[polygon.Indices.Length];
+                for (int i = 0; i < polygon.Indices.Length; i++)
+                {
+                    Vector3 v = currentPolyhedron.Vertices[polygon.Indices[i]];
+
+                    v = RotateX(v, ROTATION_ANGLE_X);
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -37,22 +84,16 @@ namespace PlatonicSolids
                 {
                     Vector3 v = currentPolyhedron.Vertices[polygon.Indices[i]];
 
-                    v = RotateX(v, ROTATION_ANGLE_X);
-                    v = RotateY(v, ROTATION_ANGLE_Y);
-
+                    //матричный поворот
                     PointF p;
                     if (projectionType == "Perspective")
-                    {
                         p = ProjectPerspective(v, width, height, scale);
-                    }
                     else
-                    {
                         p = ProjectAxonometric(v, width, height, scale);
-                    }
+
                     points[i] = p;
                 }
                 g.DrawPolygon(Pens.White, points);
-            }
         }
 
         private Vector3 RotateX(Vector3 v, double angle)
